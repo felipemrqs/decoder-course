@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db-decoder-ead-course:
+    image: postgres:16.3-alpine
+    container_name: db-decoder-ead-course
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: db_course
+    volumes:
+      - db-decoder-ead-course:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+volumes:
+  db-decoder-ead-course:
