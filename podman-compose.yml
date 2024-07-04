@@ -12,6 +12,5 @@ services:
       - db-decoder-ead-course:/var/lib/postgresql/data
     ports:
       - "5433:5432"
-
 volumes:
   db-decoder-ead-course:
