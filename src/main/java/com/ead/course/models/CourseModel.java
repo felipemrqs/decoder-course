@@ -46,7 +46,7 @@ public class CourseModel implements Serializable {
     private CourseLevel courseLevel;
 
     @Column(nullable = false)
-    private UUID instructorId;
+    private UUID userInstructor;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
