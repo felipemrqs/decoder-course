@@ -38,4 +38,9 @@ public class CourseServiceImpl implements CourseService {
     public Page<CourseModel> findAll(Pageable pageable) {
         return this.courseRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<CourseModel> findByUserId(UUID userId, Pageable pageable) {
+        return this.courseRepository.findByUserId(userId, pageable);
+    }
 }

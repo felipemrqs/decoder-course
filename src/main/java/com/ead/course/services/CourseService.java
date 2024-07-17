@@ -15,4 +15,6 @@ public interface CourseService {
     void delete(UUID courseUUID);
 
     Page<CourseModel> findAll(Pageable pageable);
+
+    Page<CourseModel> findByUserId(UUID userId, Pageable pageable);
 }

@@ -63,4 +63,8 @@ public class CourseModel implements Serializable {
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private LocalDateTime updatedAt;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private Set<CourseUserModel> coursesUsers;
 }

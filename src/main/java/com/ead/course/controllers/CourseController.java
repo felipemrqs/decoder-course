@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -57,13 +58,10 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CourseModel>> getAllCourses(@PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(courseService.findAll(pageable));
-    }
-
-    @GetMapping("/{courseUUID}")
-    public ResponseEntity<CourseModel> getCourse(@PathVariable(value = "courseUUID") UUID courseUUID) {
-        var courseModelOptional = courseService.findById(courseUUID);
-        return courseModelOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public ResponseEntity<Page<CourseModel>> getAllCourses(@RequestParam(required = false) UUID userId, @PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(
+                Optional.ofNullable(userId)
+                        .map(id -> courseService.findByUserId(id, pageable))
+                        .orElseGet(() -> courseService.findAll(pageable)));
     }
 }
